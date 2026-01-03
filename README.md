@@ -1,5 +1,8 @@
 ## Tail Chat
 **Display chat logs**
+```
+![fig.1](images/fig1.png)
+```
 
 ## Author
 
