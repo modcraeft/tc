@@ -1,0 +1,7 @@
+Pete: Hi, new test message.
+AI: Hello
+Pete: Another test message.
+AI: Another hello test.
+Pete: A new test....
+AI: New Message to test transition.
+Pete: Fresh test
