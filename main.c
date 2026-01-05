@@ -31,14 +31,12 @@
 #define MAX_WRAP_WIDTH (WW - 2 * MARGIN_X)
 #define SPACE_ADVANCE 7
 
-
-float RATE = 10;
-float RATE_RESET = 10;
+float RATE = 20;
+float RATE_RESET = 20;
 
 // Globals for window size.
 int screen_width = WW;
 int screen_height = WH;
-
 
 typedef struct {
     uint8_t r, g, b, a;
@@ -509,7 +507,7 @@ int main(int argc, char* argv[])
     if (SDL_Init(SDL_INIT_VIDEO) < 0) { fprintf(stderr, "SDL init failed: %s\n", SDL_GetError()); return 1; }
     if (TTF_Init() < 0) { fprintf(stderr, "TTF init failed: %s\n", TTF_GetError()); SDL_Quit(); return 1; }
 
-    w = SDL_CreateWindow("Chat Log Viewer (Pixel Maps)", WX, WY, WW, WH, SDL_WINDOW_BORDERLESS);
+    w = SDL_CreateWindow("tc", WX, WY, WW, WH, SDL_WINDOW_BORDERLESS);
     if (!w) {
         fprintf(stderr, "Window creation failed: %s\n", SDL_GetError());
         TTF_Quit();
@@ -609,7 +607,7 @@ int main(int argc, char* argv[])
                 int max_offset = (total_height > visible_height) ? total_height - visible_height : 0;
                 view_y_offset = (view_y_offset < 0) ? 0 : (view_y_offset > max_offset ? max_offset : view_y_offset);
 
-                if(e.key.keysym.sym == SDLK_e) RATE += 1200;
+                if(e.key.keysym.sym == SDLK_e) RATE += RATE_RESET;
                 if(e.key.keysym.sym == SDLK_F1) { c2.r = rand() % 255; c2.g = rand() % 255; c2.b = rand() % 255; }
                 if(e.key.keysym.sym == SDLK_F2) { c1.r = rand() % 255; c1.g = rand() % 255; c1.b = rand() % 255; }
                 if(e.key.keysym.sym == SDLK_F3) { c2.r = 0x77; c2.g = 0x77; c2.b = 0x77; }
