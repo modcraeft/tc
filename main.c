@@ -239,7 +239,6 @@ int render_chat_entry(SDL_Renderer* r, ChatEntry* entry, int x_start, int y_star
         for (size_t i = 0; i < text_len; i++) {
             int c = (int)line_text[i];
             if (c >= 32 && c < 127) {
-                if(c == ':' || line_idx > 0 || c == ' ') colon_flag = true;
                 if (c == 32) { //Space
                     current_x += SPACE_ADVANCE;
                 } else if (glyphs[c].num_pixels > 0) {
@@ -250,6 +249,7 @@ int render_chat_entry(SDL_Renderer* r, ChatEntry* entry, int x_start, int y_star
                 } else {
                     current_x += get_advance(c);  // Fallback advance without rendering.
                 }
+                if(c == ':' || line_idx > 0 || c == ' ') colon_flag = true;
             }
         }
 
@@ -494,15 +494,12 @@ int get_total_chat_height() {
 int main(int argc, char* argv[]) 
 { 
     if(argc >= 2) params = true;
-
     char *font_path;
     int font_size = 16;
     if(params == false) font_path = "fonts/Hack-Regular.ttf";
     else font_path = argv[1];
     if(argc >= 3) font_size = atoi(argv[2]);
-
     const char* log_filepath = (argc >= 4) ? argv[3] : "log.txt";
-    //const char* log_filepath = (argc >= 4) ? argv[3] : "/mnt/brain/Programs/dbot/dbot/discord_chat.log";
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) { fprintf(stderr, "SDL init failed: %s\n", SDL_GetError()); return 1; }
     if (TTF_Init() < 0) { fprintf(stderr, "TTF init failed: %s\n", TTF_GetError()); SDL_Quit(); return 1; }
